@@ -1,3 +1,3 @@
 # Chat App
 
-This is a chat application using Socket.io and Node.js.
+Full stack chat application using Express, Socket.io, MongoDB and React.js.

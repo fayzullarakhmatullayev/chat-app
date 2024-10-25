@@ -5,10 +5,12 @@ import MessagesInput from './MessagesInput';
 import useConversation from '../../store/useConversation';
 import { useAuthContext } from '../../context/AuthContext';
 import { useEffect } from 'react';
+import { useSocketContext } from '../../context/SocketContext';
 
 const MessageContainer = () => {
   const { selectedConversation, setSelectedConversation } = useConversation();
-
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(selectedConversation?._id);
   useEffect(() => {
     return () => setSelectedConversation(null);
   }, [setSelectedConversation]);
@@ -21,6 +23,9 @@ const MessageContainer = () => {
           <div className="bg-slate-500 px-4 py-2 mb-2">
             <span className="label-text">To: </span>
             <span className="text-gray-900 font-bold">{selectedConversation.fullName}</span>
+            <span className={`ml-2 label-text ${isOnline && 'text-green-500'}`}>
+              {isOnline ? 'Online' : 'Offline'}
+            </span>
           </div>
           <Messages />
           <MessagesInput />

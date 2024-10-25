@@ -7,7 +7,6 @@ const LogoutButton = () => {
       {!loading ? (
         <>
           <BiLogOut className="w-6 h-6 mr-2" />
-          <span>Logout</span>
         </>
       ) : (
         <span className="loading loading-spinner text-white"></span>

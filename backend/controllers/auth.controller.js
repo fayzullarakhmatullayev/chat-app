@@ -18,15 +18,17 @@ export const signup = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const boysProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
-    const girlsProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+    // const boysProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+    // const girlsProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+
+    const profilePic = `https://ui-avatars.com/api/?name=${username}&background=random`;
 
     const newUser = new User({
       fullName,
       username,
       password: hashedPassword,
       gender,
-      profilePic: gender === 'male' ? boysProfilePic : girlsProfilePic
+      profilePic
     });
 
     if (newUser) {

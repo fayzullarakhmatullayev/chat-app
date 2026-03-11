@@ -8,6 +8,11 @@ const Conversation = ({ emoji, conversation, isLastIndex }) => {
 
   const isSelected = selectedConversation?._id === conversation._id;
   const isOnline = onlineUsers.includes(conversation._id);
+
+  const errorUserImage = (e, userName) => {
+    const target = e.target;
+    target.src = `https://ui-avatars.com/api/?name=${userName}&background=random`;
+  };
   return (
     <>
       <div
@@ -18,7 +23,11 @@ const Conversation = ({ emoji, conversation, isLastIndex }) => {
       >
         <div className={`avatar ${isOnline && 'online'}`}>
           <div className="w-12 rounded-full">
-            <img src={conversation.profilePic} />
+            <img
+              src={conversation.profilePic}
+              alt={conversation.fullName}
+              onError={(e) => errorUserImage(e, conversation.fullName)}
+            />
           </div>
         </div>
         <div className="flex flex-col flex-1">
